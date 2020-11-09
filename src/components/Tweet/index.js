@@ -1,30 +1,28 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
-
+import { TweetContext } from "./TweetContext";
 import Header from "./Header";
 import ActionBar from "./ActionBar";
 
-const Tweet = ({
-  displayName,
-  username,
-  avatarSrc,
-  tweetContents,
-  isRetweetedByCurrentUser,
-  isLikedByCurrentUser,
-}) => {
+const Tweet = () => {
+  const { tweetContents, date, numOfLikes, numOfRetweets } = useContext(
+    TweetContext
+  );
   return (
     <Wrapper>
-      <Header
-        displayName={displayName}
-        username={username}
-        avatarSrc={avatarSrc}
-      />
+      <Header />
       <TweetContents>{tweetContents}</TweetContents>
+      <Timestamp>{date}</Timestamp>
       <Divider />
-      <ActionBar
-        isRetweetedByCurrentUser={isRetweetedByCurrentUser}
-        isLikedByCurrentUser={isLikedByCurrentUser}
-      />
+
+      <Stats>
+        <Bold>{numOfRetweets}</Bold>
+        <SmallFont>Retweets</SmallFont>
+        <Bold>{numOfLikes}</Bold>
+        <SmallFont>Likes</SmallFont>
+      </Stats>
+      <Divider />
+      <ActionBar />
       <Divider />
     </Wrapper>
   );
@@ -59,6 +57,17 @@ const Stats = styled.div`
   display: flex;
   align-items: center;
   height: 48px;
+`;
+
+const SmallFont = styled.span`
+  margin-left: 5px;
+  margin-right: 25px;
+  font-size: 16px;
+  color: slategray;
+`;
+
+const Bold = styled.span`
+  font-weight: bold;
 `;
 
 export default Tweet;

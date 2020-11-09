@@ -1,21 +1,22 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 
 import Tweet from "./Tweet";
 
-import avatar from "../assets/carmen-sandiego.png";
+import { TweetContext } from "./Tweet/TweetContext";
 
-const App = () => {
+const App = (props) => {
+  const {
+    tweetContents,
+    displayName,
+    username,
+    avatarSrc,
+    isRetweetedByCurrentUser,
+    isLikedByCurrentUser,
+  } = useContext(TweetContext);
   return (
     <Wrapper>
-      <Tweet
-        tweetContents="Where in the world am I?"
-        displayName="Carmen Sandiego ✨"
-        username="carmen-sandiego"
-        avatarSrc={avatar}
-        isRetweetedByCurrentUser={false}
-        isLikedByCurrentUser={false}
-      />
+      <Tweet />
     </Wrapper>
   );
 };
